@@ -1,0 +1,104 @@
+.wrapper {
+    min-height: calc(100vh - 64px - 64px);
+    padding: 20px;
+
+    .name {
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-weight: 700;
+    }
+
+    .buttons {
+        margin-top: 10px;
+    
+        button {
+            margin-right: 10px;
+            letter-spacing: 1px;
+            &.warn {
+                background: #ffbb40;
+                color: white;
+            }
+        }
+    }
+
+    .questions {
+        .question {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            .title {
+                display: inline-block;
+                margin-right: 10px;
+                width: 110px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            ::ng-deep .mat-button-toggle {
+                display: flex;
+                width: 140px;
+                min-height: 35px;
+
+                .mat-button-toggle-label-content {
+                    line-height: unset;
+                }
+                span {
+                    white-space: initial;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .wrapper {
+
+        .questions {
+            .question {
+                display: flex;
+                flex-direction: column;
+                .title {
+                    width: unset;
+                }
+                ::ng-deep .mat-button-toggle {
+                    font-size: 13px;
+                    width: 20%;
+                    .mat-button-toggle-label-content {
+                        padding: 0 5px;
+                    }
+                    span {
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 599px) {
+    .wrapper {
+        min-height: calc(100vh - 56px - 56px);
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .wrapper {
+
+        .questions {
+            .question {
+                .title {
+                }
+                ::ng-deep .mat-button-toggle {
+                    font-size: 10px;
+                    .mat-button-toggle-label-content {
+                        padding: 0 2px;
+                    }
+                    span {
+                    }
+                }
+            }
+        }
+    }
+}

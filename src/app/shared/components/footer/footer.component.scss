@@ -1,0 +1,23 @@
+:host {
+    position: relative;
+    bottom: 0;
+    width: 100vw;
+    z-index: 2;
+}
+
+.wrapper {
+    mat-toolbar {
+        background-color: #082f54;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: normal;
+    }
+
+    @media screen and (max-width: 500px) {
+        p {
+            font-size: 14px;
+        } 
+    }
+}

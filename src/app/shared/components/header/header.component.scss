@@ -1,0 +1,48 @@
+:host {
+    width: 100vw;
+    z-index: 2;
+}
+
+.wrapper {
+    mat-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #082f54;
+        position: relative;
+
+        h1 {
+            font-weight: 700;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+
+            span {
+                font-size: 25px;
+            }
+        }
+
+        button {
+            position: absolute;
+            color: whitesmoke;
+            left: 0;
+            height: 100%;
+            width: 64px;
+
+            mat-icon {
+                font-size: 32px;
+            }
+        }
+        
+
+        mat-select {
+            position: absolute;
+            left: 80%;
+            width: 65px;
+
+           
+        }
+
+    }
+}

@@ -1,0 +1,11 @@
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+
+<mat-progress-spinner
+    *ngIf="loading$ | async"
+    class="example-margin"
+    color="primary"
+    mode="indeterminate"
+>
+    </mat-progress-spinner>

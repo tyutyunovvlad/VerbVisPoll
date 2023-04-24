@@ -1,0 +1,128 @@
+<form class="form" [formGroup]="form" *ngIf="selectedPage === 0">
+
+    <h3>{{'home.newTitle' | translate}}</h3>
+    <mat-form-field class="field">
+        <mat-label>{{'home.newName' | translate}}</mat-label>
+        <input formControlName="name" matInput type="text" maxlength="50" autocomplete="off">
+
+    </mat-form-field>
+
+    <mat-form-field class="field">
+        <mat-label>{{'home.code' | translate}} (5-20)</mat-label>
+        <input formControlName="id" matInput type="text" autocomplete="off" maxlength="20">
+        <button mat-button matSuffix mat-icon-button (click)="generateID($event)">
+            <mat-icon>autorenew</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <mat-form-field class="field alt-count">
+        <mat-label>{{'home.altsNum' | translate}} (1-10)</mat-label>
+        <input formControlName="count" matInput type="number" autocomplete="off" min="1" max="10">
+    </mat-form-field>
+    <!-- <div class="metrics-select">
+        <span class="title">
+            {{'home.typeName' | translate}}:
+        </span>
+        <mat-button-toggle-group [(ngModel)]="selectedMetric" name="fontStyle" aria-label="Font Style"
+            [ngModelOptions]="{standalone: true}">
+            <mat-button-toggle class="variant" *ngFor="let type of metrics; let i = index" [value]="i">
+                <span *ngFor="let el of type.values">{{el}}</span>
+            </mat-button-toggle>
+            <mat-button-toggle [value]="100" class="variant custom" (click)="createCustomMetric()">
+                <span>{{'home.config.title' | translate}}</span>
+            </mat-button-toggle>
+
+        </mat-button-toggle-group>
+    </div> -->
+    <button mat-button color="primary" (click)="openMetricSelectPage($event)" type="submit"
+        [disabled]="form.invalid"> {{'home.next' | translate}} </button>
+    <button class="close-button" mat-button matSuffix mat-icon-button (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
+</form>
+
+<div class="form metric-select-wrapper" *ngIf="selectedPage === 1">
+    <button mat-mini-fab class="back" (click)="back(0)">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="metrics-select">
+        <span class="title">
+            {{'home.typeName' | translate}}:
+        </span>
+        <mat-button-toggle-group [(ngModel)]="selectedMetric" name="fontStyle" aria-label="Font Style"
+            [ngModelOptions]="{standalone: true}">
+            <mat-button-toggle class="variant" *ngFor="let type of metrics; let i = index" [value]="i">
+                <span *ngFor="let el of type.values">{{el}}</span>
+            </mat-button-toggle>
+            <mat-button-toggle [value]="100" class="variant custom" (click)="createCustomMetric()">
+                <span>{{'home.config.title' | translate}}</span>
+            </mat-button-toggle>
+
+        </mat-button-toggle-group>
+    </div>
+    <button mat-button color="primary" (click)="onSubmit($event)" type="submit"
+        [disabled]="selectedMetric < 0"> {{'home.next' | translate}} </button>
+</div>
+
+<form class="customMetric form" [formGroup]="customMetricForm" *ngIf="selectedPage === 2" (ngSubmit)="submitCustomMetric()">
+    <button mat-mini-fab class="back" (click)="back(1)">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h3> {{'home.config.title' | translate}} </h3>
+    <div class="first-question">
+        <label id="typeLabel">{{'home.config.selectColors' | translate}}:</label>
+        <mat-radio-group aria-labelledby="typeLabel" class="typeGroup" formControlName="type">
+            <mat-radio-button class="typeItem centered" value="centered">
+                <span class="c-1">-2</span>
+                <span class="c-2">-1</span>
+                <span class="c-3">0</span>
+                <span class="c-4">1</span>
+                <span class="c-5">2</span>
+            </mat-radio-button>
+            <mat-radio-button class="typeItem ladder" value="ladder">
+                <span class="c-1">1</span>
+                <span class="c-2">2</span>
+                <span class="c-3">3</span>
+                <span class="c-4">4</span>
+                <span class="c-5">5</span>
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div class="second-question">
+        <label>
+            {{'home.config.selectNames' | translate}}
+        </label>
+        <div class="table" [class]="customMetricForm.controls.type.value">
+            <div class="row" formArrayName="value" *ngFor="let item of customMetricForm.controls.value['controls']; let i = index">
+                <div class="color" [class]="'color-' + i"></div>
+                <div class="number">
+                    {{customMetricForm.controls.type.value === 'ladder' ? i + 1 : i - 2}}
+                </div>
+                <div class="value">
+                    <input type="text" autocomplete="off" maxlength="20" [formControlName]="i" placeholder="{{'home.config.selectOneName' | translate}}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button mat-button color="primary" type="submit">{{'home.config.next' | translate}}</button>
+</form>
+
+
+<form class="alternatives form" [formGroup]="alternativesForm" *ngIf="selectedPage === 3 && alternativesForm" (ngSubmit)="onSubmitAlternatives()">
+    <button mat-mini-fab class="back" (click)="back(1)">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h3>{{'home.altsName' | translate}}</h3>
+    <div class="inputs">
+        <mat-form-field class="field ng-dirty ng-touched" *ngFor="let alt of data?.alternatives; let i = index">
+            <mat-label>{{'home.alt' | translate}} {{i+1}}</mat-label>
+            <input (input)="kek()" [formControlName]="i" class="alternative ng-dirty ng-touched" matInput type="text"
+                autocomplete="off" maxlength="50">
+        </mat-form-field>
+    </div>
+
+    <button mat-button color="primary" type="submit" [disabled]="alternativesForm.invalid"> {{'home.next' | translate}}
+    </button>
+</form>

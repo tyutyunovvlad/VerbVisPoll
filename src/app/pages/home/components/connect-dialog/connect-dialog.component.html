@@ -1,0 +1,12 @@
+<div class="form">
+    <h3>{{'home.findTitle' | translate}}</h3>
+    <mat-form-field class="example-form-field">
+        <mat-label>{{'home.code' | translate}}</mat-label>
+        <input matInput type="text" [(ngModel)]="id" autocomplete="off">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="id = ''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field> 
+    
+    <button mat-button color="primary" (click)="connect()">{{'home.connect' | translate}}</button>
+</div>

@@ -1,0 +1,20 @@
+<div class="wrapper">
+    <!-- <span>{{name}}</span> <br> -->
+    <span class="name">{{'poll.exp' | translate}} {{expertName}}</span>
+
+    <div class="questions">
+        <div class="question" *ngFor="let alt of alternatives; let i = index">
+            <span class="title" [title]="alt">{{alt}}</span>
+            <mat-button-toggle-group [(ngModel)]="marks[i]">
+                <mat-button-toggle class="variant" *ngFor="let type of metric; let i = index" [value]="i">
+                    <span>{{type}}</span>
+                </mat-button-toggle>
+
+            </mat-button-toggle-group>
+        </div>
+    </div>
+    <div class="buttons">
+        <button mat-raised-button color="primary" (click)="send()">{{'poll.submit' | translate}}</button>
+        <!-- <button mat-raised-button class="warn" (click)="back()">Повернутися</button> -->
+    </div>
+</div>

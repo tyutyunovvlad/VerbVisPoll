@@ -1,0 +1,26 @@
+<div class="wrapper">
+    <h1 class="title">
+        {{'home.title' | translate}}
+    </h1>
+    
+
+    <div class="toolbar">
+        <button
+            mat-raised-button
+            (click)="create()"
+            class="first"
+        >
+        <!-- [disabled]="disabled" -->
+        {{'home.new' | translate}}
+        </button>
+
+        <button
+            mat-raised-button
+            (click)="connect()"
+            class="second"
+        >
+        {{'home.find' | translate}}
+        </button>
+
+    </div>
+</div>
