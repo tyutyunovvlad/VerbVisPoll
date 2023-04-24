@@ -37,12 +37,12 @@ registerLocaleData(localeUa, 'ua');
 
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAm1APdRt9H3n0BvMpUw0JbpGPsD9wcd9I',
-  authDomain: 'fivevvpoll.firebaseapp.com',
-  projectId: 'fivevvpoll',
-  storageBucket: 'fivevvpoll.appspot.com',
-  messagingSenderId: '317894793893',
-  appId: '1:317894793893:web:992fbf0297b6423bfc4b4c'
+  apiKey: 'AIzaSyDkXNWQwKCX3PjGb-NB8bkKeFMIEOX21V8',
+  authDomain: 'verbvispoll.firebaseapp.com',
+  projectId: 'verbvispoll',
+  storageBucket: 'verbvispoll.appspot.com',
+  messagingSenderId: '69257182738',
+  appId: '1:69257182738:web:b1dc4fbfef5ef0de7122cb'
 };
 @NgModule({
   declarations: [
