@@ -5,44 +5,41 @@
 
 .wrapper {
     mat-toolbar {
+        .container {
+            max-width: 1200px;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #082f54;
+        background-color: #121214;
         position: relative;
-
         h1 {
             font-weight: 700;
-            position: absolute;
+            // position: absolute;
             left: 50%;
             transform: translateX(-50%);
             cursor: pointer;
-
             span {
                 font-size: 25px;
             }
         }
-
         button {
-            position: absolute;
+            // position: absolute;
             color: whitesmoke;
             left: 0;
             height: 100%;
             width: 64px;
-
             mat-icon {
                 font-size: 32px;
             }
         }
-        
-
         mat-select {
-            position: absolute;
+            // position: absolute;
             left: 80%;
             width: 65px;
-
-           
         }
-
     }
 }
