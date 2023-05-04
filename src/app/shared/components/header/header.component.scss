@@ -11,19 +11,22 @@
             width: 100%;
             justify-content: space-between;
         }
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #121214;
-        position: relative;
+        background-color: #fffdf9;
+        color: black;
+        border-bottom: 1px solid #e8e7e4;
         h1 {
             font-weight: 700;
             // position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            // left: 50%;
+            // transform: translateX(-50%);
             cursor: pointer;
+            color: rgb(32, 21, 21);
             span {
-                font-size: 25px;
+                color: #ff6d2b;
             }
         }
         button {

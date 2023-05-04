@@ -7,8 +7,23 @@
     background-color: #f1f1f1;
 }
 
+::ng-deep .mat-button-base {
+    border-radius: 12px !important;
+}
+
+::ng-deep mat-dialog-container {
+  background: rgb(255 255 255 / 67%) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(23.4px) !important;
+}
+
+::ng-deep .cdk-overlay-dark-backdrop {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
 mat-progress-spinner {
-    
+
     z-index: 1001;
     width: 100px;
     height: 100px;

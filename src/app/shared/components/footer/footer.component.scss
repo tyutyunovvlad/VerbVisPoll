@@ -6,7 +6,7 @@
 }
 
 .wrapper {
-    background-color: #121214;
+    background-color: #fffdf9;
     .container {
         max-width: 1200px;
         display: flex;
@@ -15,7 +15,10 @@
         margin: 0 auto;
     }
     mat-toolbar {
-        background-color: #121214;
+        background-color: #fffdf9;
+        color: rgb(32, 21, 21);
+        justify-content: flex-end;
+        font-family: 'Inter', sans-serif;
     }
     p {
         font-size: 16px;

@@ -28,6 +28,10 @@ input[type="number"]::-webkit-inner-spin-button {
         display: none;
     }
 
+    button.next {
+        align-self: flex-end;
+    }
+
     .field {
         width: 100%;
 
@@ -109,7 +113,7 @@ input[type="number"]::-webkit-inner-spin-button {
     position: relative;
     width: 550px;
 
-    
+
 
     .first-question {
         display: flex;

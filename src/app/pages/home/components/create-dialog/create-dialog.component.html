@@ -35,7 +35,7 @@
         </mat-button-toggle-group>
     </div> -->
     <button mat-button color="primary" (click)="openMetricSelectPage($event)" type="submit"
-        [disabled]="form.invalid"> {{'home.next' | translate}} </button>
+        [disabled]="form.invalid" class="next"> {{'home.next' | translate}} </button>
     <button class="close-button" mat-button matSuffix mat-icon-button (click)="close()">
         <mat-icon>close</mat-icon>
     </button>
@@ -60,7 +60,7 @@
 
         </mat-button-toggle-group>
     </div>
-    <button mat-button color="primary" (click)="onSubmit($event)" type="submit"
+    <button mat-button color="primary" (click)="onSubmit($event)" type="submit" class="next"
         [disabled]="selectedMetric < 0"> {{'home.next' | translate}} </button>
 </div>
 
@@ -106,7 +106,7 @@
         </div>
     </div>
 
-    <button mat-button color="primary" type="submit">{{'home.config.next' | translate}}</button>
+    <button mat-button color="primary" class="next" type="submit">{{'home.config.next' | translate}}</button>
 </form>
 
 
@@ -123,6 +123,6 @@
         </mat-form-field>
     </div>
 
-    <button mat-button color="primary" type="submit" [disabled]="alternativesForm.invalid"> {{'home.next' | translate}}
+    <button mat-button color="primary" type="submit" [disabled]="alternativesForm.invalid" class="next"> {{'home.next' | translate}}
     </button>
 </form>
