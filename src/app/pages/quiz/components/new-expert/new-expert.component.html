@@ -6,7 +6,7 @@
         <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="name=''">
             <mat-icon>close</mat-icon>
         </button>
-    </mat-form-field> 
+    </mat-form-field>
 
-    <button mat-button color="primary" type="submit" [disabled]="!name?.trim().length" (click)="submit()"> {{'poll.next3' | translate}} </button>
+    <button class="submit" mat-button color="primary" type="submit" [disabled]="!name?.trim().length" (click)="submit()"> {{'poll.next3' | translate}} </button>
 </div>

@@ -51,7 +51,7 @@
         </span>
         <mat-button-toggle-group [(ngModel)]="selectedMetric" name="fontStyle" aria-label="Font Style"
             [ngModelOptions]="{standalone: true}">
-            <mat-button-toggle class="variant" *ngFor="let type of metrics; let i = index" [value]="i">
+            <mat-button-toggle class="variant" *ngFor="let type of metrics; let i = index" [value]="i" [ngClass]="type.type">
                 <span *ngFor="let el of type.values">{{el}}</span>
             </mat-button-toggle>
             <mat-button-toggle [value]="100" class="variant custom" (click)="createCustomMetric()">

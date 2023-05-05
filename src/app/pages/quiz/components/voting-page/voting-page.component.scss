@@ -1,104 +1,140 @@
-.wrapper {
-    min-height: calc(100vh - 64px - 64px);
-    padding: 20px;
+:host {
+  display: block;
+  background: #fffdf9;
+}
 
-    .name {
-        display: block;
+.wrapper {
+  min-height: calc(100vh - 64px - 64px);
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  .name {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 700;
+  }
+
+  .buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    button {
+      width: 120px;
+      letter-spacing: 1px;
+      background: #ff6d2b;
+
+    }
+  }
+
+  .questions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+    .question {
+      flex-direction: column;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .title {
+        display: inline-block;
+        margin-right: 10px;
+        min-width: 110px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        font-weight: 700;
-    }
+        font-size: 18px;
+      }
+      mat-button-toggle-group {
+        border: 1px solid #e8e7e4;
+        border-radius: 15px;
+        padding: 5px;
+        background: white;
+      }
+      ::ng-deep .mat-button-toggle {
+        display: flex;
+        width: 140px;
+        min-height: 35px;
+        border: none;
+        padding: 5px 0;
+        border-radius: 15px;
+        transition: all 0.25s ease-in-out;
 
-    .buttons {
-        margin-top: 10px;
-    
-        button {
-            margin-right: 10px;
-            letter-spacing: 1px;
-            &.warn {
-                background: #ffbb40;
-                color: white;
-            }
+        &.mat-button-toggle-checked {
+          color: #ff6d2b;
         }
-    }
 
-    .questions {
-        .question {
-            margin: 5px 0;
-            display: flex;
-            align-items: center;
-            .title {
-                display: inline-block;
-                margin-right: 10px;
-                width: 110px;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-            ::ng-deep .mat-button-toggle {
-                display: flex;
-                width: 140px;
-                min-height: 35px;
-
-                .mat-button-toggle-label-content {
-                    line-height: unset;
-                }
-                span {
-                    white-space: initial;
-                }
-            }
+        .mat-button-toggle-focus-overlay {
+          border: none;
         }
+
+        .mat-ripple {
+          display: none;
+        }
+
+
+        .mat-button-toggle-label-content {
+          line-height: unset;
+        }
+        span {
+          white-space: initial;
+        }
+      }
     }
+  }
+
+
 }
 
 @media screen and (max-width: 750px) {
-    .wrapper {
-
-        .questions {
-            .question {
-                display: flex;
-                flex-direction: column;
-                .title {
-                    width: unset;
-                }
-                ::ng-deep .mat-button-toggle {
-                    font-size: 13px;
-                    width: 20%;
-                    .mat-button-toggle-label-content {
-                        padding: 0 5px;
-                    }
-                    span {
-                    }
-                }
-            }
+  .wrapper {
+    .questions {
+      .question {
+        display: flex;
+        flex-direction: column;
+        .title {
+          width: unset;
         }
+
+        mat-button-toggle-group {
+          width: 100%;
+        }
+        ::ng-deep .mat-button-toggle {
+          width: 20%;
+          .mat-button-toggle-label-content {
+            padding: 0 5px;
+          }
+          span {
+          }
+        }
+      }
     }
+  }
 }
 
 @media screen and (max-width: 599px) {
-    .wrapper {
-        min-height: calc(100vh - 56px - 56px);
-    }
+  .wrapper {
+    min-height: calc(100vh - 56px - 56px);
+  }
 }
 
-
 @media screen and (max-width: 500px) {
-    .wrapper {
-
-        .questions {
-            .question {
-                .title {
-                }
-                ::ng-deep .mat-button-toggle {
-                    font-size: 10px;
-                    .mat-button-toggle-label-content {
-                        padding: 0 2px;
-                    }
-                    span {
-                    }
-                }
-            }
+  .wrapper {
+    .questions {
+      .question {
+        .title {
         }
+        ::ng-deep .mat-button-toggle {
+          .mat-button-toggle-label-content {
+            padding: 0 2px;
+          }
+          span {
+          }
+        }
+      }
     }
+  }
 }

@@ -1,19 +1,27 @@
 <div class="wrapper">
-    <mat-toolbar color="primary">
-        <div class="container">
-            <button mat-icon-button (click)="home()">
+  <mat-toolbar color="primary">
+    <div class="container">
+      <!-- <button mat-icon-button (click)="home()">
             <mat-icon>home</mat-icon>
-            </button>
+            </button> -->
 
-            <h1 (click)="home()">VerbVis<span>Poll</span></h1>
+      <div class="logos" style="display: flex; gap:5px;">
+        <h1 (click)="home()" style="background-color: #3d4592;
+            color: white;
+            padding: 0 10px;
+            border-radius: 10px;">VerbVis<span>Poll</span></h1>
 
-            <mat-select [value]="langu" (selectionChange)="lang($event)">
-                <mat-option value="ua">UKR</mat-option>
-                <!-- <mat-option value="ru">RUS</mat-option> -->
-                <mat-option value="en">ENG</mat-option>
-            </mat-select>
-        </div>
-    </mat-toolbar>
+
+      </div>
+
+
+      <mat-select [value]="langu" (selectionChange)="lang($event)">
+        <mat-option value="ua">UKR</mat-option>
+        <!-- <mat-option value="ru">RUS</mat-option> -->
+        <mat-option value="en">ENG</mat-option>
+      </mat-select>
+    </div>
+  </mat-toolbar>
 
 
 </div>

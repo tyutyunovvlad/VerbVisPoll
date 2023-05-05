@@ -9,6 +9,11 @@ body {
     overflow-x: hidden;
 }
 
+body {
+  overflow-y: scroll;
+}
+
+
 * {
     box-sizing: border-box;
 }

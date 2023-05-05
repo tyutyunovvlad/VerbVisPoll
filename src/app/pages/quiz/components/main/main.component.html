@@ -1,227 +1,239 @@
 <div class="wrapper" [class]="markType">
-    <div class="results">
-        <h2>{{'poll.name' | translate}}: <span class="name">{{ name }}</span></h2>
+  <div class="results">
+    <section>
+      <h2>{{'poll.name' | translate}}: <span class="name">{{ name }}</span></h2>
 
-        <div class="info">
-            <p>{{'poll.code' | translate}}: <span>{{code}}</span></p>
-            <p>{{'poll.count' | translate}}:<span> {{votes?.length || 0}}</span></p>
-            <p *ngIf="times[0]">{{'poll.firstTime' | translate}}: <span>{{times[0] | date:'short'}}</span></p>
-            <p *ngIf="times[1]">{{'poll.lastTime' | translate}}: <span>{{times[1] | date:'short'}}</span></p>
-            <p style="cursor: pointer;" (click)="copy('https://fivevvpoll.web.app/?id='+code)">{{'poll.link' |
-                translate}}:
-                <input id="link" style="color: #10599f; cursor: pointer; text-decoration: underline; font-weight: bold;"
-                    value="https://fivevvpoll.web.app/?id={{code}}" disabled>
-            </p>
-        </div>
+      <div class="info">
+        <p>{{'poll.code' | translate}}: <span>{{code}}</span></p>
+        <p>{{'poll.count' | translate}}:<span> {{votes?.length || 0}}</span></p>
+        <p *ngIf="times[0]">{{'poll.firstTime' | translate}}: <span>{{times[0] | date:'short'}}</span></p>
+        <p *ngIf="times[1]">{{'poll.lastTime' | translate}}: <span>{{times[1] | date:'short'}}</span></p>
+        <p style="cursor: pointer;" (click)="copy('https://fivevvpoll.web.app/?id='+code)">{{'poll.link' |
+          translate}}:
+          <input id="link" style="color: #10599f; cursor: pointer; text-decoration: underline; font-weight: bold;"
+            value="https://fivevvpoll.web.app/?id={{code}}" disabled>
+        </p>
+      </div>
+      <div style="color: #072949; text-transform: uppercase; margin-top: 30px;" class="no" *ngIf="!votes?.length">
+        {{'poll.no' | translate}} </div>
+    </section>
 
-        <div style="color: #072949; text-transform: uppercase; margin-top: 30px;" class="no" *ngIf="!votes?.length">
-            {{'poll.no' | translate}} </div>
+    <section>
+      <h2 class="results-title" *ngIf="votes?.length">{{'poll.title' | translate}}</h2>
 
-        <h2 *ngIf="votes?.length">{{'poll.title' | translate}}:</h2>
+      <div class="res-3" *ngIf="votes?.length">
+        <div class="result__1">
+          <div class="alt" *ngFor="let alt of alternatives; let i = index"
+            [style]="'order:'+ mainResults[i].mark + ';'">
 
-        <div class="res-3" *ngIf="votes?.length">
-            <div class="result__1">
-                <div class="alt" *ngFor="let alt of alternatives; let i = index"
-                    [style]="'order:'+ mainResults[i].mark + ';'">
+            <div class="span" [ngStyle]="{left: (mainResults[i].mark < 0 ? '55%' : '-50%')}"><span
+                [title]="alt">{{alt}}</span></div>
+            <div class="line mark" [attr.mark]="mainResults[i].color"
+              [ngStyle]="{width: (mainResults[i].mark !== 0 ? mainResults[i].per : 10) + '%', transform: mainResults[i].mark === 0 ?'translate(-50%,0)':'unset'}"
+              [style]="(mainResults[i].mark >= 0 ? 'left:' : 'right:') + (mainResults[i].mark >= 0 ? '50%' :  mainResults[i].per-50+'%') ">
 
-                    <div class="span" [ngStyle]="{left: (mainResults[i].mark < 0 ? '55%' : '-50%')}"><span
-                            [title]="alt">{{alt}}</span></div>
-                    <div class="line mark" [attr.mark]="mainResults[i].color"
-                        [ngStyle]="{width: (mainResults[i].mark !== 0 ? mainResults[i].per : 10) + '%', transform: mainResults[i].mark === 0 ?'translate(-50%,0)':'unset'}"
-                        [style]="(mainResults[i].mark >= 0 ? 'left:' : 'right:') + (mainResults[i].mark >= 0 ? '50%' :  mainResults[i].per-50+'%') ">
+              <span class="total">
+                {{mainResults[i].mark}}
+              </span>
 
-                        <span class="total">
-                            {{mainResults[i].mark}}
-                        </span>
-
-                    </div>
-                </div>
             </div>
-
+          </div>
         </div>
 
-
-        <div class="buttons">
-            <button mat-raised-button class="ext" (click)="extend()" *ngIf="votes?.length && !extended">{{'poll.next1' |
-                translate}}</button>
-            <button mat-raised-button class="new" (click)="newExpert()">{{'poll.new' | translate}}</button>
-        </div>
+      </div>
 
 
+      <div class="buttons">
+        <button mat-raised-button class="ext" (click)="extend()" *ngIf="votes?.length && !extended">{{'poll.next1' |
+          translate}} <mat-icon aria-hidden="false">expand_more</mat-icon></button>
+        <!-- <button mat-raised-button class="new" (click)="newExpert()">{{'poll.new' | translate}}</button> -->
+      </div>
+    </section>
 
+    <div class="res-2-bg">
+
+      <section >
         <div class="res-2" *ngIf="votes?.length && extended">
 
-            <div class="config-type">
-                <span class="title">{{'poll.configType' | translate}}:</span>
-                <div class="table" [class]="metricData.type">
-                    <div class="row" *ngFor="let value of metricData.values; let i = index;">
-                        <div class="color" [class]="'color-' + i"></div>
-                        <div class="number">
-                            {{metricData.type === 'ladder' ? i + 1 : i - 2}}
-                        </div>
-                        <div class="value" *ngIf="+value !== +(metricData.type === 'ladder' ? i + 1 : i - 2)">{{value}}</div>
-                    </div>
+          <div class="config-type">
+            <span class="title">{{'poll.configType' | translate}}:</span>
+            <div class="table" [class]="metricData.type">
+              <div class="row" *ngFor="let value of metricData.values; let i = index;">
+                <div class="color" [class]="'color-' + i"></div>
+                <div class="number">
+                  {{metricData.type === 'ladder' ? i + 1 : i - 2}}
                 </div>
+                <div class="value" *ngIf="+value !== +(metricData.type === 'ladder' ? i + 1 : i - 2)">{{value}}</div>
+              </div>
             </div>
+          </div>
 
-            <div class="result__2">
-                <div class="alt" *ngFor="let alt of alternatives; let i = index" [style]="'order:'+((getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
-                            (getNumberOfMarks(bars[i].marks, 1) * (markType==='centered' ? -1 : 2)) +
-                            (getNumberOfMarks(bars[i].marks, 2) * (markType==='centered' ? 0 : 3)) +
-                            (getNumberOfMarks(bars[i].marks, 3) * (markType==='centered' ? 1 : 4)) +
-                            (getNumberOfMarks(bars[i].marks, 4) * (markType==='centered' ? 2 : 5))) + ';'">
-                    <div class="title" [title]="alt">{{alt}}</div>
-                    <div class="line">
-                        <div class="bar">
-                            <div [attr.mark]="0" *ngIf="getNumberOfMarks(bars[i].marks, 0)"
-                                [style]="'width:' + getNumberOfMarks(bars[i].marks, 0) * 100 / bars[i].marks.length + '%' "
-                                class="mark">
-                                <p>{{getNumberOfMarks(bars[i].marks, 0)}}</p>
-                                <p *ngIf="getNumberOfMarks(bars[i].marks, 0) * 100 / bars[i].marks.length > 10">
-                                    {{(getNumberOfMarks(bars[i].marks, 0) * 100 / bars[i].marks.length).toFixed(1)}}%
-                                </p>
-                            </div>
-                            <div [attr.mark]="1" *ngIf="getNumberOfMarks(bars[i].marks, 1)"
-                                [style]="'width:' + getNumberOfMarks(bars[i].marks, 1) * 100 / bars[i].marks.length + '%' "
-                                class="mark">
-                                <p>{{getNumberOfMarks(bars[i].marks, 1)}}</p>
-                                <p *ngIf="getNumberOfMarks(bars[i].marks, 1) * 100 / bars[i].marks.length > 10">
-                                    {{(getNumberOfMarks(bars[i].marks, 1) * 100 / bars[i].marks.length).toFixed(1)}}%
-                                </p>
-                            </div>
-                            <div [attr.mark]="2" *ngIf="getNumberOfMarks(bars[i].marks, 2)"
-                                [style]="'width:' + getNumberOfMarks(bars[i].marks, 2) * 100 / bars[i].marks.length + '%' "
-                                class="mark">
-                                <p>{{getNumberOfMarks(bars[i].marks, 2)}}</p>
-                                <p *ngIf="getNumberOfMarks(bars[i].marks, 2) * 100 / bars[i].marks.length > 10">
-                                    {{(getNumberOfMarks(bars[i].marks, 2) * 100 / bars[i].marks.length).toFixed(1)}}%
-                                </p>
-                            </div>
-                            <div [attr.mark]="3" *ngIf="getNumberOfMarks(bars[i].marks, 3)"
-                                [style]="'width:' + getNumberOfMarks(bars[i].marks, 3) * 100 / bars[i].marks.length + '%' "
-                                class="mark">
-                                <p>{{getNumberOfMarks(bars[i].marks, 3)}}</p>
-                                <p *ngIf="getNumberOfMarks(bars[i].marks, 3) * 100 / bars[i].marks.length > 10">
-                                    {{(getNumberOfMarks(bars[i].marks, 3) * 100 / bars[i].marks.length).toFixed(1)}}%
-                                </p>
-                            </div>
-                            <div [attr.mark]="4" *ngIf="getNumberOfMarks(bars[i].marks, 4)"
-                                [style]="'width:' + getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length + '%' "
-                                class="mark">
-                                <p>{{getNumberOfMarks(bars[i].marks, 4)}}</p>
-                                <p *ngIf="getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length > 10">
-                                    {{(getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length).toFixed(1)}}%
-                                </p>
-                            </div>
-                        </div>
-                        <div class="total">
-                            {{
-                            ((getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
-                            (getNumberOfMarks(bars[i].marks, 1) * (markType==='centered' ? -1 : 2)) +
-                            (getNumberOfMarks(bars[i].marks, 2) * (markType==='centered' ? 0 : 3)) +
-                            (getNumberOfMarks(bars[i].marks, 3) * (markType==='centered' ? 1 : 4)) +
-                            (getNumberOfMarks(bars[i].marks, 4) * (markType==='centered' ? 2 : 5)))
-                            /
-                            bars[i].marks.length
-                            | number:'1.2-2'
-                            }}
-                        </div>
-                    </div>
-
-                    <div *ngIf="res2MoreStates[i]" class="more">
-                        <p class="ZZ" *ngIf="markType === 'centered'" [ngClass]="{bold: calcZZ(bars[i].marks) > 50}">
-                            {{'poll.types.ZZ' | translate}}:
-                            <span>
-                                {{ calcZZ(bars[i].marks) }}%
-                            </span>
-                        </p>
-                        <p class="ZNZ" *ngIf="markType === 'centered'" [ngClass]="{bold: calcZNZ(bars[i].marks) > 50}">
-                            {{'poll.types.ZNZ' | translate}}:
-                            <span>
-                                {{calcZNZ(bars[i].marks) }}%
-                            </span>
-                        </p>
-                        <p class="IN" *ngIf="markType === 'centered'" [ngClass]="{bold: calcIN(bars[i].marks) > 50}">
-                            {{'poll.types.IN' | translate}}:
-                            <span>
-                                {{calcIN(bars[i].marks)}}%
-                            </span>
-                        </p>
-                        <p class="PD" [ngClass]="{bold: calcPD(bars[i].marks) > 50}">
-                            {{'poll.types.PD' | translate}}:
-                            <span>
-                                {{ calcPD(bars[i].marks) }}%
-                            </span>
-                        </p>
-                        <p class="CON" *ngIf="markType === 'centered'" [ngClass]="{bold: calcCON(bars[i].marks) > 50}">
-                            {{'poll.types.CON' | translate}}:
-                            <span>
-                                {{ calcCON(bars[i].marks) }}%
-                            </span>
-                        </p>
-                        <p class="LO" *ngIf="markType === 'centered'" [ngClass]="{bold: calcLO(bars[i].marks) > 50}">
-                            {{'poll.types.LO' | translate}}:
-                            <span>
-                                {{ calcLO(bars[i].marks) }}%
-                            </span>
-                        </p>
-                        <p class="ALO" *ngIf="markType === 'centered'" [ngClass]="{bold: calcALO(bars[i].marks) > 50}">
-                            {{'poll.types.ALO' | translate}}:
-                            <span>
-                                {{ calcALO(bars[i].marks) }}%
-                            </span>
-                        </p>
-                        <p class="PO" [ngClass]="{bold: calcPO(bars[i].marks) > 50}">
-                            {{'poll.types.PO' | translate}}:
-                            <span>
-                                {{ calcPO(bars[i].marks) }}%
-                            </span>
-                        </p>
-                        <p class="OS" [ngClass]="{bold: calcOS(bars[i].marks) > 50}">
-                            {{'poll.types.OS' | translate}}:
-                            <span>
-                                {{ calcOS(bars[i].marks) }}%
-                            </span>
-                        </p>
-                    </div>
-                    <button mat-button color="primary" class="more-button"
-                        (click)="res2MoreStates[i] = !res2MoreStates[i]">
-                        {{
-                        (res2MoreStates[i] ? 'poll.hide' : 'poll.more') | translate
-                        }}
-                    </button>
+          <div class="result__2">
+            <div class="alt" *ngFor="let alt of alternatives; let i = index" [style]="'order:'+((getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
+                              (getNumberOfMarks(bars[i].marks, 1) * (markType==='centered' ? -1 : 2)) +
+                              (getNumberOfMarks(bars[i].marks, 2) * (markType==='centered' ? 0 : 3)) +
+                              (getNumberOfMarks(bars[i].marks, 3) * (markType==='centered' ? 1 : 4)) +
+                              (getNumberOfMarks(bars[i].marks, 4) * (markType==='centered' ? 2 : 5))) + ';'">
+              <div class="title" [title]="alt">{{alt}}</div>
+              <div class="line">
+                <div class="bar">
+                  <div [attr.mark]="0" *ngIf="getNumberOfMarks(bars[i].marks, 0)"
+                    [style]="'width:' + getNumberOfMarks(bars[i].marks, 0) * 100 / bars[i].marks.length + '%' "
+                    class="mark">
+                    <p>{{getNumberOfMarks(bars[i].marks, 0)}}</p>
+                    <p *ngIf="getNumberOfMarks(bars[i].marks, 0) * 100 / bars[i].marks.length > 10">
+                      {{(getNumberOfMarks(bars[i].marks, 0) * 100 / bars[i].marks.length).toFixed(1)}}%
+                    </p>
+                  </div>
+                  <div [attr.mark]="1" *ngIf="getNumberOfMarks(bars[i].marks, 1)"
+                    [style]="'width:' + getNumberOfMarks(bars[i].marks, 1) * 100 / bars[i].marks.length + '%' "
+                    class="mark">
+                    <p>{{getNumberOfMarks(bars[i].marks, 1)}}</p>
+                    <p *ngIf="getNumberOfMarks(bars[i].marks, 1) * 100 / bars[i].marks.length > 10">
+                      {{(getNumberOfMarks(bars[i].marks, 1) * 100 / bars[i].marks.length).toFixed(1)}}%
+                    </p>
+                  </div>
+                  <div [attr.mark]="2" *ngIf="getNumberOfMarks(bars[i].marks, 2)"
+                    [style]="'width:' + getNumberOfMarks(bars[i].marks, 2) * 100 / bars[i].marks.length + '%' "
+                    class="mark">
+                    <p>{{getNumberOfMarks(bars[i].marks, 2)}}</p>
+                    <p *ngIf="getNumberOfMarks(bars[i].marks, 2) * 100 / bars[i].marks.length > 10">
+                      {{(getNumberOfMarks(bars[i].marks, 2) * 100 / bars[i].marks.length).toFixed(1)}}%
+                    </p>
+                  </div>
+                  <div [attr.mark]="3" *ngIf="getNumberOfMarks(bars[i].marks, 3)"
+                    [style]="'width:' + getNumberOfMarks(bars[i].marks, 3) * 100 / bars[i].marks.length + '%' "
+                    class="mark">
+                    <p>{{getNumberOfMarks(bars[i].marks, 3)}}</p>
+                    <p *ngIf="getNumberOfMarks(bars[i].marks, 3) * 100 / bars[i].marks.length > 10">
+                      {{(getNumberOfMarks(bars[i].marks, 3) * 100 / bars[i].marks.length).toFixed(1)}}%
+                    </p>
+                  </div>
+                  <div [attr.mark]="4" *ngIf="getNumberOfMarks(bars[i].marks, 4)"
+                    [style]="'width:' + getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length + '%' "
+                    class="mark">
+                    <p>{{getNumberOfMarks(bars[i].marks, 4)}}</p>
+                    <p *ngIf="getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length > 10">
+                      {{(getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length).toFixed(1)}}%
+                    </p>
+                  </div>
                 </div>
+                <div class="total">
+                  {{
+                  ((getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
+                  (getNumberOfMarks(bars[i].marks, 1) * (markType==='centered' ? -1 : 2)) +
+                  (getNumberOfMarks(bars[i].marks, 2) * (markType==='centered' ? 0 : 3)) +
+                  (getNumberOfMarks(bars[i].marks, 3) * (markType==='centered' ? 1 : 4)) +
+                  (getNumberOfMarks(bars[i].marks, 4) * (markType==='centered' ? 2 : 5)))
+                  /
+                  bars[i].marks.length
+                  | number:'1.2-2'
+                  }}
+                </div>
+              </div>
+
+              <div *ngIf="res2MoreStates[i]" class="more">
+                <p class="ZZ" *ngIf="markType === 'centered'" [ngClass]="{bold: calcZZ(bars[i].marks) > 50}">
+                  {{'poll.types.ZZ' | translate}}:
+                  <span>
+                    {{ calcZZ(bars[i].marks) }}%
+                  </span>
+                </p>
+                <p class="ZNZ" *ngIf="markType === 'centered'" [ngClass]="{bold: calcZNZ(bars[i].marks) > 50}">
+                  {{'poll.types.ZNZ' | translate}}:
+                  <span>
+                    {{calcZNZ(bars[i].marks) }}%
+                  </span>
+                </p>
+                <p class="IN" *ngIf="markType === 'centered'" [ngClass]="{bold: calcIN(bars[i].marks) > 50}">
+                  {{'poll.types.IN' | translate}}:
+                  <span>
+                    {{calcIN(bars[i].marks)}}%
+                  </span>
+                </p>
+                <p class="PD" [ngClass]="{bold: calcPD(bars[i].marks) > 50}">
+                  {{'poll.types.PD' | translate}}:
+                  <span>
+                    {{ calcPD(bars[i].marks) }}%
+                  </span>
+                </p>
+                <p class="CON" *ngIf="markType === 'centered'" [ngClass]="{bold: calcCON(bars[i].marks) > 50}">
+                  {{'poll.types.CON' | translate}}:
+                  <span>
+                    {{ calcCON(bars[i].marks) }}%
+                  </span>
+                </p>
+                <p class="LO" *ngIf="markType === 'centered'" [ngClass]="{bold: calcLO(bars[i].marks) > 50}">
+                  {{'poll.types.LO' | translate}}:
+                  <span>
+                    {{ calcLO(bars[i].marks) }}%
+                  </span>
+                </p>
+                <p class="ALO" *ngIf="markType === 'centered'" [ngClass]="{bold: calcALO(bars[i].marks) > 50}">
+                  {{'poll.types.ALO' | translate}}:
+                  <span>
+                    {{ calcALO(bars[i].marks) }}%
+                  </span>
+                </p>
+                <p class="PO" [ngClass]="{bold: calcPO(bars[i].marks) > 50}">
+                  {{'poll.types.PO' | translate}}:
+                  <span>
+                    {{ calcPO(bars[i].marks) }}%
+                  </span>
+                </p>
+                <p class="OS" [ngClass]="{bold: calcOS(bars[i].marks) > 50}">
+                  {{'poll.types.OS' | translate}}:
+                  <span>
+                    {{ calcOS(bars[i].marks) }}%
+                  </span>
+                </p>
+              </div>
+              <button mat-button color="primary" class="more-button" (click)="res2MoreStates[i] = !res2MoreStates[i]">
+                {{
+                (res2MoreStates[i] ? 'poll.hide' : 'poll.more') | translate
+                }}
+              </button>
             </div>
+          </div>
         </div>
 
         <div class="buttons wide" *ngIf="extended">
-            <button mat-raised-button class="ext" (click)="extend2()" *ngIf="votes?.length && !extended2">{{'poll.next2'
-                | translate}}</button>
-            <button mat-raised-button class="new" (click)="newExpert()">{{'poll.new' | translate}}</button>
+          <button mat-raised-button class="ext" (click)="extend2()" *ngIf="votes?.length && !extended2">{{'poll.next2'
+            | translate}} <mat-icon aria-hidden="false">expand_more</mat-icon></button>
+          <!-- <button mat-raised-button class="new" (click)="newExpert()">{{'poll.new' | translate}}</button> -->
         </div>
-
-        <br>
-
-        <div class="res-1" *ngIf="votes?.length && extended2">
-            <div class="head">
-                <span class="empty"></span>
-                <span class="alt" *ngFor="let alt of alternatives" [title]="alt"> {{alt}} </span>
-            </div>
-            <div class="vote" *ngFor="let vote of votes">
-                <span class="name" [title]="vote.name">{{vote.name}}</span>
-                <span class="mark" *ngFor="let mark of vote.votes" [attr.mark]="mark"
-                    [title]="markType === 'centered' ? +mark-2 : +mark+1"></span>
-            </div>
-        </div>
-
-        <div class="buttons" *ngIf="votes?.length > 20 && extended2">
-            <button mat-raised-button class="new" (click)="newExpert()">{{'poll.new' | translate}}</button>
-        </div>
-
+      </section>
     </div>
+
+
+    <section>
+      <div class="res-1" *ngIf="votes?.length && extended2">
+        <div class="head">
+          <span class="empty"></span>
+          <span class="alt" *ngFor="let alt of alternatives" [title]="alt"> {{alt}} </span>
+        </div>
+        <div class="vote" *ngFor="let vote of votes">
+          <span class="name" [title]="vote.name">{{vote.name}}</span>
+          <span class="mark" *ngFor="let mark of vote.votes" [attr.mark]="mark"
+            [title]="markType === 'centered' ? +mark-2 : +mark+1"></span>
+        </div>
+      </div>
+
+      <div class="buttons" *ngIf="votes?.length > 20 && extended2">
+        <!-- <button mat-raised-button class="new" (click)="newExpert()">{{'poll.new' | translate}}</button> -->
+      </div>
+    </section>
+
+
+    <section  class="new-sticky">
+      <button mat-raised-button (click)="newExpert()">{{'poll.new' | translate}} <mat-icon aria-hidden="false">edit__outline</mat-icon></button>
+    </section>
+
+
+  </div>
 </div>
 
 
 <div class="toTop" *ngIf="extended" (click)="toTop()">
-    <mat-icon>arrow_upward</mat-icon>
+  <mat-icon>arrow_upward</mat-icon>
 </div>
