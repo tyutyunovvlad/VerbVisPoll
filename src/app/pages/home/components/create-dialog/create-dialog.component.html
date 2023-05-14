@@ -34,8 +34,8 @@
 
         </mat-button-toggle-group>
     </div> -->
-  <button mat-button color="primary" (click)="onSubmit($event)" type="submit" [disabled]="form.invalid"
-    class="next"> {{'home.next' | translate}} </button>
+  <button mat-button color="primary" (click)="onSubmit($event)" type="submit" [disabled]="form.invalid" class="next">
+    {{'home.next' | translate}} </button>
   <button class="close-button" mat-button matSuffix mat-icon-button (click)="close()">
     <mat-icon>close</mat-icon>
   </button>
@@ -60,8 +60,8 @@
 
     </mat-button-toggle-group>
   </div>
-  <button mat-button color="primary" (click)="finish()" type="submit" class="next"
-    [disabled]="selectedMetric < 0"> {{'home.next' | translate}} </button>
+  <button mat-button color="primary" (click)="finish()" type="submit" class="next" [disabled]="selectedMetric < 0">
+    {{'home.next' | translate}} </button>
 </div>
 
 <form class="customMetric form" [formGroup]="customMetricForm" *ngIf="selectedPage === 2"
@@ -129,10 +129,10 @@
 
   <div class="buttons">
     <div class="left"><button mat-button color="primary" (click)="addAlternative($event)"
-        [disabled]="data?.alternatives.length >= 10" class="add"> Add alternative
+        [disabled]="data?.alternatives.length >= 10" class="add"> {{'home.addAlt' | translate}}
       </button>
       <button mat-button color="primary" (click)="removeAlternative($event)" [disabled]="data?.alternatives.length <= 2"
-        class="remove"> Remove alternative
+        class="remove"> {{'home.removeAlt' | translate}}
       </button>
     </div>
 

@@ -250,10 +250,8 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
 
   public finish(): void {
     this.data.type = this.selectedMetric;
-    console.log(this.data);
-
-    // this.mainService.create(this.data);
-    // this.dialog.closeAll();
+    this.mainService.create(this.data);
+    this.dialog.closeAll();
   }
 
   public back(index): void {
