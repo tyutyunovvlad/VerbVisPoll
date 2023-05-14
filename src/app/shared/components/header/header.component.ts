@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
     translate.setTranslation('ua', {
       home: {
         title: 'Онлайн-опитування',
+        subtitle: 'Вербально-візуальна аналітика',
         new: 'Почати нове опитування',
         find: 'Приєднатись до опитування',
         newTitle: 'Нове опитування',
@@ -186,6 +187,7 @@ export class HeaderComponent implements OnInit {
     translate.setTranslation('en', {
       home: {
         title: 'Online Polls',
+        subtitle: 'Verbal-visual analytics',
         new: 'Start a new poll',
         find: 'Join existing poll',
         newTitle: 'New Poll',

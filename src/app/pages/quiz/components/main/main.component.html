@@ -225,15 +225,16 @@
     </section>
 
 
-    <section  class="new-sticky">
-      <button mat-raised-button (click)="newExpert()">{{'poll.new' | translate}} <mat-icon aria-hidden="false">edit__outline</mat-icon></button>
-    </section>
+    <div  class="new-sticky">
+      <button class="new" mat-raised-button (click)="newExpert()">{{'poll.new' | translate}} <mat-icon aria-hidden="false">edit__outline</mat-icon></button>
+      <button class="top" *ngIf="extended"   mat-mini-fab (click)="toTop()"><mat-icon>arrow_upward</mat-icon></button>
+    </div>
 
 
   </div>
 </div>
 
 
-<div class="toTop" *ngIf="extended" (click)="toTop()">
+<!-- <div class="toTop" *ngIf="extended" (click)="toTop()">
   <mat-icon>arrow_upward</mat-icon>
-</div>
+</div> -->

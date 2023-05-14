@@ -16,14 +16,14 @@
 }
 
 ::ng-deep mat-dialog-container {
-  background: rgba(255, 255, 255, 0.7) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
   border-radius: 16px !important;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
-  backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(10px) !important;
 }
 
 ::ng-deep .cdk-overlay-dark-backdrop {
-  background: rgba(0, 0, 0, 0.05) !important;
+  background: rgba(0, 0, 0, 0.2) !important;
 }
 
 mat-progress-spinner {

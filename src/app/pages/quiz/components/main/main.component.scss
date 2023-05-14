@@ -25,6 +25,7 @@ section {
   flex-direction: column;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 10px;
 }
 
 .wrapper {
@@ -51,17 +52,17 @@ section {
     button {
       color: white;
       margin: 30px 0;
-      width: 150px;
+      width: unset;
       font-size: 16px;
       &.ext {
         background: #3d4592;
         // margin-right: 100px;
-        padding-right: 20px;
+        padding-right: 35px;
 
         mat-icon {
           position: absolute;
           top: 50%;
-          right: 17px;
+          right: 11px;
           transform: translateY(-50%);
         }
       }
@@ -73,7 +74,6 @@ section {
 
   .results {
     width: 100%;
-    padding: 0 10px;
   }
 
   h2 {
@@ -218,7 +218,8 @@ section {
               // background: #ff0000;
             }
             &-1 {
-              background: #ffa27b;
+              background: #ff9898;
+              // background: #ffa27b;
               // background: #ffb9b9;
             }
             &-2 {
@@ -230,7 +231,8 @@ section {
               // background: #b6df89;
             }
             &-4 {
-              background: #4d8b72;
+              background: #50b36a;
+              // background: #4d8b72;
               // background: #00b050;
             }
           }
@@ -338,12 +340,16 @@ section {
 }
 
 .new-sticky {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  padding: 0 10px;
   position: sticky;
   bottom: 20px;
-  align-items: center;
   padding-top: 20px;
 
-  button {
+  .new {
     position: relative;
     padding-right: 32px;
     background: #ff6d2b;
@@ -357,6 +363,15 @@ section {
       transform: translateY(-46%);
       font-size: 20px;
     }
+  }
+
+  .top {
+    border-radius: 100% !important;
+    width: 50px;
+    height: 50px;
+    background: #ff6a00;
+    color: white;
+    cursor: pointer;
   }
 }
 
@@ -441,7 +456,8 @@ section {
         // background: #ff0000;
       }
       &[mark="1"] {
-        background: #ffa27b;
+        background: #ff9898;
+        // background: #ffa27b;
         // background: #ffb9b9;
       }
       &[mark="2"] {
@@ -453,7 +469,9 @@ section {
         // background: #b6df89;
       }
       &[mark="4"] {
-        background: #4d8b72;
+
+        background: #50b36a;
+        // background: #4d8b72;
         // background: #00b050;
       }
     }

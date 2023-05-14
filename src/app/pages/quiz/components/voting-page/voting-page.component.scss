@@ -64,7 +64,8 @@
         transition: all 0.25s ease-in-out;
 
         &.mat-button-toggle-checked {
-          color: #ff6d2b;
+          // color: #ff6d2b;
+          font-weight: bold;
         }
 
         .mat-button-toggle-focus-overlay {
