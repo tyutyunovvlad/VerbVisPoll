@@ -87,12 +87,14 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
             ...this.customMetricValue
           }
         };
-
+        const values = this.alternativesForm?.value ? Object.values(this.alternativesForm?.value) : [];
         this.alternativesForm = new FormGroup({});
-        for (let i = 0; i < 2; i++) {
+        const length = values.length > 2 ? values.length : 2;
+        for (let i = 0; i <  length; i++) {
+          const text = values[i] || this.translateService.instant('home.alt') + ' ' + (i + 1);
           this.alternativesForm.addControl(
             `${i}`,
-            new FormControl(`${this.translateService.instant('home.alt')} ${i + 1}`, [Validators.required, Validators.maxLength(50)])
+            new FormControl(`${text}`, [Validators.required, Validators.maxLength(50)])
           );
           this.data.alternatives.push('');
         }
@@ -109,7 +111,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
   public addAlternative(e): void {
     e.preventDefault();
     const values = Object.values(this.alternativesForm?.value);
-    console.log(values);
+
 
     this.alternativesForm = new FormGroup({});
     this.data.alternatives.push('');
@@ -137,7 +139,6 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
   public removeAlternative(e): void {
     e.preventDefault();
     const values = Object.values(this.alternativesForm?.value);
-    console.log(values);
 
     this.alternativesForm = new FormGroup({});
     this.data.alternatives.pop();
@@ -174,9 +175,10 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
 
       this.data.alternatives[i] = this.alternativesForm?.value[i];
     }
-
-    this.mainService.create(this.data);
-    this.dialog.closeAll();
+    this.selectedPage = 1;
+    // this.openMetricSelectPage(null);
+    // this.mainService.create(this.data);
+    // this.dialog.closeAll();
   }
 
 
@@ -232,7 +234,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     if (this.customMetricForm.invalid) {
       return;
     }
-    this.selectedPage = 1;
+    // this.selectedPage = 1;
     (this.customMetricForm.controls.value as FormArray).controls.forEach(el => {
       console.log(el);
       el.setValue(el.value.trim());
@@ -240,6 +242,18 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     this.customMetricValue = this.customMetricForm.value;
     this.selectedMetric = 100;
     this.customMetricForm = null;
+    this.data.type = this.selectedMetric;
+    this.data.customMetric = this.customMetricValue;
+    this.mainService.create(this.data);
+    this.dialog.closeAll();
+  }
+
+  public finish(): void {
+    this.data.type = this.selectedMetric;
+    console.log(this.data);
+
+    // this.mainService.create(this.data);
+    // this.dialog.closeAll();
   }
 
   public back(index): void {

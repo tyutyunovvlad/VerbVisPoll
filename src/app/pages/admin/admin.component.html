@@ -14,8 +14,8 @@
       <div class="link" (click)="open(item.id)">
         <span [ngStyle]="{width: '30%'}">{{item.name}}</span>
         <span [ngStyle]="{width: '20%'}"> {{item.votes.length}} </span>
-        <span [ngStyle]="{width: '25%'}">{{item.votes[0].time | date:'short'}}</span>
-        <span [ngStyle]="{width: '25%'}">{{item.votes[item.votes.length - 1].time | date:'short'}}</span>
+        <span [ngStyle]="{width: '25%'}">{{item.votes[0]?.time | date:'short'}}</span>
+        <span [ngStyle]="{width: '25%'}">{{item.votes[item.votes.length - 1]?.time | date:'short'}}</span>
       </div>
       <mat-icon class="delete" (click)="remove(item.id)">delete</mat-icon>
     </mat-list-item>

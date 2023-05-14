@@ -34,7 +34,7 @@
 
         </mat-button-toggle-group>
     </div> -->
-  <button mat-button color="primary" (click)="openMetricSelectPage($event)" type="submit" [disabled]="form.invalid"
+  <button mat-button color="primary" (click)="onSubmit($event)" type="submit" [disabled]="form.invalid"
     class="next"> {{'home.next' | translate}} </button>
   <button class="close-button" mat-button matSuffix mat-icon-button (click)="close()">
     <mat-icon>close</mat-icon>
@@ -42,7 +42,7 @@
 </form>
 
 <div class="form metric-select-wrapper" *ngIf="selectedPage === 1">
-  <button mat-mini-fab class="back" (click)="back(0)">
+  <button mat-mini-fab class="back" (click)="back(3)">
     <mat-icon>arrow_back</mat-icon>
   </button>
   <div class="metrics-select">
@@ -60,7 +60,7 @@
 
     </mat-button-toggle-group>
   </div>
-  <button mat-button color="primary" (click)="onSubmit($event)" type="submit" class="next"
+  <button mat-button color="primary" (click)="finish()" type="submit" class="next"
     [disabled]="selectedMetric < 0"> {{'home.next' | translate}} </button>
 </div>
 
@@ -115,7 +115,7 @@
 
 <form class="alternatives form" [formGroup]="alternativesForm" *ngIf="selectedPage === 3 && alternativesForm"
   (ngSubmit)="onSubmitAlternatives()">
-  <button mat-mini-fab class="back" (click)="back(1)">
+  <button mat-mini-fab class="back" (click)="back(0)">
     <mat-icon>arrow_back</mat-icon>
   </button>
   <h3>{{'home.altsName' | translate}}</h3>
