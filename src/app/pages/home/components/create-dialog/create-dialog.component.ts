@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,7 +31,8 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     private mainService: MainService,
     public dialog: MatDialog,
     private errorService: ErrorService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private cdr: ChangeDetectorRef
   ) {
     this.mainService.translateAlternatives();
     this.metrics = this.mainService.defaultMetrics;
@@ -39,7 +40,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       id: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
-      count: new FormControl('2', [Validators.required, Validators.max(10), Validators.min(1)]),
+      // count: new FormControl('2', [Validators.required, Validators.max(10), Validators.min(1)]),
     });
 
   }
@@ -61,7 +62,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
 
   public onSubmit(e): void {
     e.preventDefault();
-    
+
     if (this.form.value.name.trim().length === 0 || this.form.value.id.trim().length === 0) {
       this.form.controls.name.setValue(this.form.value.name.trim());
       this.form.controls.id.setValue(this.form.value.id.trim());
@@ -71,13 +72,13 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     if (this.selectedMetric === 100 && this.customMetricForm?.invalid) {
       return;
     }
-    
+
 
     this.subs.push(this.mainService.checkIfExist(this.form.value.id.trim()).subscribe(exist => {
       if (!exist) {
         this.data = {
           name: this.form.value.name.trim(),
-          count: this.form.value.count,
+          // count: this.form.value.count,
           id: this.form.value.id.trim(),
           type: this.selectedMetric,
           alternatives: [],
@@ -88,7 +89,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
         };
 
         this.alternativesForm = new FormGroup({});
-        for (let i = 0; i < this.data.count; i++) {
+        for (let i = 0; i < 2; i++) {
           this.alternativesForm.addControl(
             `${i}`,
             new FormControl(`${this.translateService.instant('home.alt')} ${i + 1}`, [Validators.required, Validators.maxLength(50)])
@@ -101,11 +102,62 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
       }
     }));
 
-      this.selectedPage = 3;
+    this.selectedPage = 3;
+
+  }
+
+  public addAlternative(e): void {
+    e.preventDefault();
+    const values = Object.values(this.alternativesForm?.value);
+    console.log(values);
+
+    this.alternativesForm = new FormGroup({});
+    this.data.alternatives.push('');
+
+    for (let i = 0; i < this.data.alternatives.length; i++) {
+      const text = values[i] || this.translateService.instant('home.alt') + ' ' + (i + 1);
+      console.log(text);
+
+      this.alternativesForm.addControl(
+        `${i}`,
+        new FormControl(`${text}`, [Validators.required, Validators.maxLength(50)])
+      );
+
+    }
+
+    // this.alternativesForm?.addControl(
+    //   `${this.alternativesForm?.value.length}`,
+    //   new FormControl(`${this.translateService.instant('home.alt')} ${this.alternativesForm?.value.length + 1}`, [Validators.required, Validators.maxLength(50)])
+    // );
+    // this.data.alternatives.push('');
+    // this.cdr.detectChanges();
+
+  }
+
+  public removeAlternative(e): void {
+    e.preventDefault();
+    const values = Object.values(this.alternativesForm?.value);
+    console.log(values);
+
+    this.alternativesForm = new FormGroup({});
+    this.data.alternatives.pop();
+
+    for (let i = 0; i < this.data.alternatives.length; i++) {
+      const text = values[i] || this.translateService.instant('home.alt') + ' ' + (i + 1);
+      console.log(text);
+
+      this.alternativesForm.addControl(
+        `${i}`,
+        new FormControl(`${text}`, [Validators.required, Validators.maxLength(50)])
+      );
+
+    }
 
   }
 
   public onSubmitAlternatives(): void {
+    console.log(111);
+
     // tslint:disable: forin
     for (const i in this.alternativesForm?.value) {
       for (const j in this.alternativesForm?.value) {
@@ -150,7 +202,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     for (const i in this.alternativesForm?.value) {
       for (const j in this.alternativesForm?.value) {
         if (this.alternativesForm?.value[i] === this.alternativesForm?.value[j] && i !== j) {
-          this.alternativesForm.controls[i].setErrors({'incorrect': true});
+          this.alternativesForm.controls[i].setErrors({ 'incorrect': true });
           this.alternativesForm.markAllAsTouched();
           this.alternativesForm.markAsDirty();
           this.errorService.showAltErrors();
@@ -162,7 +214,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
   }
 
   public createCustomMetric(): void {
-    
+
     this.customMetricForm = new FormGroup({
       type: new FormControl(this.customMetricValue?.type || 'centered', Validators.required),
       value: new FormArray([

@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 export interface IData {
   name: string;
   id: string;
-  count: number;
+  // count: number;
   type: number;
   alternatives: Array<string>;
   votes?: Array<IVote>;

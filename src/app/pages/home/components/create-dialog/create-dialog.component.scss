@@ -147,11 +147,23 @@ input[type="number"]::-webkit-inner-spin-button {
     flex-wrap: wrap;
 
     .field {
-      flex: 1 0 40%;
+      flex: 1 0 calc(50% - 20px);
 
       &:not(:last-child) {
         margin-right: 20px;
       }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .left {
+      display: flex;
+      align-items: center;
     }
   }
 }

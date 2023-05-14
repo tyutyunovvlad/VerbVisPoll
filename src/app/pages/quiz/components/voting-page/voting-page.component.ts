@@ -30,10 +30,10 @@ export class VotingPageComponent implements OnInit, OnDestroy {
   ) {
     this.transateServer.onLangChange.subscribe(res => {
       setTimeout(() => {
-        
+
         this.metric = this.mainService.metrics[this.type]?.values;
         this.mainService.translateAlternatives();
-        
+
       }, 10);
     });
     this.subs.push(this.mainService.options$.subscribe(res => {
@@ -41,12 +41,12 @@ export class VotingPageComponent implements OnInit, OnDestroy {
         this.name = res.name;
         this.type = res.type;
         this.mainService.translateAlternatives();
-        
+
         this.expertName = this.mainService.votingName;
         this.metric = this.mainService.metrics[res.type].values;
         this.alternatives = res.alternatives;
 
-        for (let i = 0; i < res.count; i++) {
+        for (let i = 0; i < res.alternatives.length; i++) {
           this.marks.push(2);
         }
       } else {
